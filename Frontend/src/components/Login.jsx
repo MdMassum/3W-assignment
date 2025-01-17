@@ -1,0 +1,66 @@
+import axios from "axios";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+const LoginForm = ({setIsAdminLoggedIn}) => {
+  const [formData, setFormData] = useState({ username: "", password: "" });
+  const [message, setMessage] = useState(null)
+  const navigate = useNavigate()
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+   
+    try {
+      const resp = await axios.post(`${import.meta.env.VITE_BASE_URL}/admin/login`,{
+        username:formData.username,
+        password:formData.password
+      })
+    //   console.log(admin)
+      if(resp.data.success){
+        setIsAdminLoggedIn(true)
+        navigate('/dashboard')
+      }
+
+    } catch (error) {
+      setMessage(error);
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className="max-w-md mx-auto mt-10 p-4 bg-gray-100 shadow-lg rounded">
+        {message && <p className="text-rose-600 mx-2 text-center">{message}</p>}
+      <h2 className="text-xl font-bold mb-4 text-center">Login Form</h2>
+      <div className="mb-4">
+        <label className="block font-bold">Username</label>
+        <input
+          type="text"
+          name="username"
+          value={formData.username}
+          onChange={handleChange}
+          className="w-full border rounded p-2"
+          required
+        />
+      </div>
+      <div className="mb-4">
+        <label className="block font-bold">Password</label>
+        <input
+          type="text"
+          name="password"
+          value={formData.password}
+          onChange={handleChange}
+          className="w-full border rounded p-2"
+          required
+        />
+      </div>
+      <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded">
+        Login
+      </button>
+    </form>
+  );
+};
+
+export default LoginForm;
