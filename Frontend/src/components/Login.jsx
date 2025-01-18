@@ -60,6 +60,12 @@ const LoginForm = ({setIsAdminLoggedIn}) => {
       <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded">
         Login
       </button>
+
+      <div className="flex mt-4 text-lg gap-4">
+        <p>Username : Admin</p>
+        <span>|</span>
+        <p>Password : 12345</p>
+      </div>
     </form>
   );
 };

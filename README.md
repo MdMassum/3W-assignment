@@ -205,3 +205,12 @@ Authenticate admin using credentials.
 You can use tools like **Postman** or **cURL** to test the endpoints.
 
 ---
+
+
+## Deployed Links
+
+**Frontend Url** - `https://3-w-assignment-zo1b.vercel.app/`
+
+**Backend Url** -  `https://3-w-assignment-backend-ten.vercel.app/`
+
+---
