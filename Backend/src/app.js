@@ -24,9 +24,17 @@ connectDB();
 
 // Middleware
 
+// added local and deployed url in allowed origin and removed trailing '/'
+const allowedOrigins = ['http://localhost:5173', 'https://3-w-assignment-zo1b.vercel.app'];
+
 app.use(cors({
-    // origin:'http://localhost:5173/',
-    origin:'https://3-w-assignment-zo1b.vercel.app/',     // frontend url
+    origin: (origin, callback) => {
+        if (allowedOrigins.includes(origin) || !origin) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
     methods: ["GET", "POST", "DELETE", "PUT"],
     allowedHeaders: [
         "Content-Type",
@@ -34,9 +42,10 @@ app.use(cors({
         "Cache-Control",
         "Expires",
         "Pragma",
-      ],
+    ],
     credentials: true
-}))
+}));
+
 
 app.use(cookieParser());
 app.use(bodyParser.json());
