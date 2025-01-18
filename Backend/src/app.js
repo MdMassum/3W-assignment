@@ -25,7 +25,7 @@ connectDB();
 // Middleware
 
 app.use(cors({
-    // origin:'http://localhost:5173',
+    // origin:'http://localhost:5173/',
     origin:'https://3-w-assignment-zo1b.vercel.app/',     // frontend url
     methods: ["GET", "POST", "DELETE", "PUT"],
     allowedHeaders: [

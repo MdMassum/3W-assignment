@@ -4,7 +4,8 @@ import { useNavigate } from "react-router-dom";
 
 const LoginForm = ({setIsAdminLoggedIn}) => {
   const [formData, setFormData] = useState({ username: "", password: "" });
-  const [message, setMessage] = useState(null)
+  const [error, setError] = useState(null)
+  const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
 
   const handleChange = (e) => {
@@ -13,6 +14,9 @@ const LoginForm = ({setIsAdminLoggedIn}) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    setLoading(true);
+    setError(null)
    
     try {
       const resp = await axios.post(`${import.meta.env.VITE_BASE_URL}/admin/login`,{
@@ -23,17 +27,19 @@ const LoginForm = ({setIsAdminLoggedIn}) => {
       if(resp.data.success){
         setIsAdminLoggedIn(true)
         navigate('/dashboard')
+        setLoading(false)
       }
-
+      setLoading(false)
     } catch (error) {
       console.log(error);
-      setMessage(error.response.data.message || error.message);
+      setError(error?.response?.data?.message || error.message);
+      setLoading(false)
     }
   };
 
   return (
     <form onSubmit={handleSubmit} className="max-w-md mx-auto mt-10 p-4 bg-gray-100 shadow-lg rounded">
-        {message && <p className="text-rose-600 mx-2 text-center">{message}</p>}
+        {error && <p className="text-rose-600 mx-2 text-center">{error}</p>}
       <h2 className="text-xl font-bold mb-4 text-center">Login Form</h2>
       <div className="mb-4">
         <label className="block font-bold">Username</label>
@@ -58,7 +64,7 @@ const LoginForm = ({setIsAdminLoggedIn}) => {
         />
       </div>
       <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded">
-        Login
+        {loading ? "Loading" : "Login"}
       </button>
 
       <div className="flex mt-4 text-lg gap-4">

@@ -35,7 +35,7 @@ const UserForm = () => {
       setloading(false);
     } catch (error) {
       setloading(false);
-      setError(error.message || "Error submitting user data!");
+      setError(error?.response?.data?.message || error?.message || "Error submitting user data!");
     }
   };
 
