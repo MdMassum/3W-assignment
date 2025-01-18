@@ -19,14 +19,15 @@ const LoginForm = ({setIsAdminLoggedIn}) => {
         username:formData.username,
         password:formData.password
       })
-    //   console.log(admin)
+      console.log(resp)
       if(resp.data.success){
         setIsAdminLoggedIn(true)
         navigate('/dashboard')
       }
 
     } catch (error) {
-      setMessage(error);
+      console.log(error);
+      setMessage(error.response.data.message || error.message);
     }
   };
 

@@ -4,7 +4,8 @@ import { submitUserData } from "../services/api";
 const UserForm = () => {
   const [formData, setFormData] = useState({ name: "", socialMediaHandle: "" });
   const [images, setImages] = useState([]);
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState(null);
+  const [error, setError] = useState(null);
   const [loading, setloading] = useState(false);
 
   const handleChange = (e) => {
@@ -16,6 +17,8 @@ const UserForm = () => {
   };
 
   const handleSubmit = async (e) => {
+    setError(null);
+    setMessage(null)
     e.preventDefault();
     const data = new FormData();
     data.append("name", formData.name);
@@ -32,7 +35,7 @@ const UserForm = () => {
       setloading(false);
     } catch (error) {
       setloading(false);
-      setMessage("Error submitting user data!");
+      setError(error.message || "Error submitting user data!");
     }
   };
 
@@ -40,6 +43,7 @@ const UserForm = () => {
     <form onSubmit={handleSubmit} className="max-w-md mx-auto mt-10 p-4 bg-gray-100 shadow-lg rounded">
       <h2 className="text-xl font-bold mb-4">User Submission Form</h2>
       {message && <p className="mb-4 text-green-500">{message}</p>}
+      {error && <p className="mb-4 text-rose-500">{error}</p>}
       <div className="mb-4">
         <label className="block font-bold">Name</label>
         <input
