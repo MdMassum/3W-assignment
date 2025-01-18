@@ -12,7 +12,7 @@ const App = () => {
     <Router>
       <Header isAdminLoggedIn={isAdminLoggedIn} setIsAdminLoggedIn={setIsAdminLoggedIn} />
       <Routes>
-        <Route path="/submit" element={<UserForm />} />
+        <Route path="/" element={<UserForm />} />
         <Route path="/dashboard" element={isAdminLoggedIn ? <AdminDashboard /> : <p>Login required</p>} />
         <Route path="/login" element={<LoginForm setIsAdminLoggedIn={setIsAdminLoggedIn}/>} />
       </Routes>

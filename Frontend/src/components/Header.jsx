@@ -7,7 +7,7 @@ const Header = ({ isAdminLoggedIn, setIsAdminLoggedIn }) => {
 
   const handleLogout = ()=>{
     setIsAdminLoggedIn(false);
-    navigate('/submit')
+    navigate('/')
   }
   return (
     <header className="bg-blue-500 p-4 text-white flex justify-between items-center">
@@ -27,7 +27,7 @@ const Header = ({ isAdminLoggedIn, setIsAdminLoggedIn }) => {
             Login
           </Link>
         )}
-        <Link to="/submit" className="bg-green-500 px-4 py-2 rounded">
+        <Link to="/" className="bg-green-500 px-4 py-2 rounded">
           Create User
         </Link>
       </nav>
