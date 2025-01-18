@@ -2,6 +2,38 @@
 
 This is the backend implementation for a system that allows users to submit their name, social media handle, and upload multiple images. The submitted data is stored in a database and can be viewed by administrators via a dashboard. Images are stored in Cloudinary.
 
+---
+
+## Directory Structure
+
+```
+project/
+├── src/
+│   ├── config/
+│   │   ├── cloudinary.js
+│   │   ├── db.js
+│   ├── controllers/
+│   │   ├── adminController.js
+│   │   ├── userController.js
+│   ├── middleware/
+│   │   ├── auth.js
+│   │   ├── fileUpload.js
+│   ├── models/
+│   │   ├── Admin.js
+│   │   ├── User.js
+│   ├── routes/
+│   │   ├── adminRoutes.js
+│   │   ├── userRoutes.js
+│   ├── utils/
+│   │   ├── jwtToken.js
+│   ├── app.js
+├── .env
+├── package.json
+├── README.md
+```
+
+---
+
 ## Features
 
 - **User Submission:**
@@ -139,43 +171,13 @@ Authenticate admin using credentials.
   #### POST `/api/admin/logout`
 Authenticate admin using credentials.
 
-- **Request Body:**
+- **Response:**
   ```json
   {
-    "username": "<admin_username>",
-    "password": "<admin_password>"
+    "success": true,
+    "message": "Logged Out Successfully"
   }
   ```
-
----
-
-## Directory Structure
-
-```
-project/
-├── src/
-│   ├── config/
-│   │   ├── cloudinary.js
-│   │   ├── db.js
-│   ├── controllers/
-│   │   ├── adminController.js
-│   │   ├── userController.js
-│   ├── middleware/
-│   │   ├── auth.js
-│   │   ├── fileUpload.js
-│   ├── models/
-│   │   ├── Admin.js
-│   │   ├── User.js
-│   ├── routes/
-│   │   ├── adminRoutes.js
-│   │   ├── userRoutes.js
-│   ├── utils/
-│   │   ├── jwtToken.js
-│   ├── app.js
-├── .env
-├── package.json
-├── README.md
-```
 
 ---
 
